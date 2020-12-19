@@ -63,10 +63,45 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property _512x512bb() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("_512x512bb", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property closed() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("closed", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to False.
+        '''</summary>
+        Friend ReadOnly Property FullScreenWarning() As String
+            Get
+                Return ResourceManager.GetString("FullScreenWarning", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        '''&lt;login&gt;
+        '''	&lt;user&gt;
+        '''		&lt;username&gt;admin&lt;/username&gt;
+        '''		&lt;password&gt;password&lt;/password&gt;
+        '''		&lt;admin&gt;true&lt;/admin&gt;
+        '''	&lt;/user&gt;
+        '''&lt;/login&gt;.
+        '''</summary>
+        Friend ReadOnly Property Login() As String
+            Get
+                Return ResourceManager.GetString("Login", resourceCulture)
             End Get
         End Property
         

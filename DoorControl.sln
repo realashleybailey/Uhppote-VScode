@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DoorControl", "DoorControl.vbproj", "{DF885185-2B91-411E-BF81-9B2A696B1FDF}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "DoorControl", "DoorControl.vbproj", "{DF885185-2B91-411E-BF81-9B2A696B1FDF}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "..\Setup1\Setup1.vdproj", "{35115EB5-2D27-495B-BF37-3D5A3D2DAAE2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{518BB59E-92D1-4B3C-9E60-0F0C3F4A5AA5}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		\\Mac\Home\Desktop\20190604 2\Demo\C#\ControllerConfigurationTool-English\WGController32_CSharp\bin\Debug\n3kAdrtC.dll = \\Mac\Home\Desktop\20190604 2\Demo\C#\ControllerConfigurationTool-English\WGController32_CSharp\bin\Debug\n3kAdrtC.dll
+		\\Mac\Home\Desktop\20190604 2\Demo\C#\ControllerConfigurationTool-English\WGController32_CSharp\bin\Debug\n3kAdrtC.xml = \\Mac\Home\Desktop\20190604 2\Demo\C#\ControllerConfigurationTool-English\WGController32_CSharp\bin\Debug\n3kAdrtC.xml
+		\\Mac\Home\Desktop\20190604 2\Basic Function Protocols\ControllerConfigurationTool\zxing.dll = \\Mac\Home\Desktop\20190604 2\Basic Function Protocols\ControllerConfigurationTool\zxing.dll
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,8 @@ Global
 		{DF885185-2B91-411E-BF81-9B2A696B1FDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF885185-2B91-411E-BF81-9B2A696B1FDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF885185-2B91-411E-BF81-9B2A696B1FDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35115EB5-2D27-495B-BF37-3D5A3D2DAAE2}.Debug|Any CPU.ActiveCfg = Debug
+		{35115EB5-2D27-495B-BF37-3D5A3D2DAAE2}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

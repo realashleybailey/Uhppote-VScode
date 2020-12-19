@@ -201,6 +201,7 @@ Partial Class DoorControl
         Me.Label6.Size = New System.Drawing.Size(31, 33)
         Me.Label6.TabIndex = 11
         Me.Label6.Text = "1"
+        Me.Label6.Visible = False
         '
         'Button6
         '
@@ -235,7 +236,7 @@ Partial Class DoorControl
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(228, 36)
         Me.Button9.TabIndex = 15
-        Me.Button9.Text = "More"
+        Me.Button9.Text = "Full Screen"
         Me.Button9.UseVisualStyleBackColor = True
         '
         'DoorControl
@@ -264,7 +265,7 @@ Partial Class DoorControl
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "DoorControl"
-        Me.Text = "More"
+        Me.Text = "Door Control"
         Me.TopMost = True
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()

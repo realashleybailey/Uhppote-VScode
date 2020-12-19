@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+	<user>
+		<name></name>
+		<address></address>
+		<phone></phone>
+		<email></email>
+	</user>
+	<license>
+		<key></key>
+	</license>
+	<settings>
+		<fullscreenwarning>false</fullscreenwarning>
+	</settings>
+</config>

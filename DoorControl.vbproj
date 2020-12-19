@@ -11,9 +11,46 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Config.xml" />
+    <None Remove="Resources\DoorControl.exe" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary.dll">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>f935dc20-1cf0-11d0-adb9-00c04fd58a0b</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <Import Include="System.Data" />
     <Import Include="System.Drawing" />
     <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net5.0-windows\DoorControl.exe" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ObjectListView.Official" Version="2.9.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="n3kAdrtC">
+      <HintPath>\\Mac\Home\Desktop\20190604 2\Demo\C#\ControllerConfigurationTool-English\WGController32_CSharp\bin\Release\n3kAdrtC.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

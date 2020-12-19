@@ -2,33 +2,8 @@
 Imports System.Text
 
 Public Class Cli
-    Private Sub Cli_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim fs As FileStream = File.Create(CurDir() & "log.txt")
 
-        Dim proc As New Process
-        proc.StartInfo.FileName = CurDir() & "\uhppoted-cli.exe"
-        proc.StartInfo.Arguments = ""
-        proc.StartInfo.CreateNoWindow = True
-        proc.StartInfo.UseShellExecute = False
-        proc.StartInfo.RedirectStandardOutput = True
-        proc.Start()
-        proc.WaitForExit()
-
-        Dim output() As String = proc.StandardOutput.ReadToEnd.Split(CChar(vbLf))
-        For Each ln As String In output
-            RichTextBox1.Text = ln & Environment.NewLine & RichTextBox1.Text
-        Next
-
-        Dim c As Char() = {Chr(10)}
-        Dim s As String() = RichTextBox1.Text.Split(c,
-        StringSplitOptions.RemoveEmptyEntries)
-        Array.Reverse(s)
-        RichTextBox1.Text = String.Join(c, s)
-
-        Timer1.Stop()
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Function Search()
 
         If TextBox1.TextLength = 0 Then
 
@@ -59,9 +34,39 @@ Public Class Cli
                 RichTextBox1.Refresh()
             End If
 
+            TextBox1.Text = ""
+
         End If
 
+    End Function
+    Private Sub Cli_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim fs As FileStream = File.Create(CurDir() & "log.txt")
 
+        Dim proc As New Process
+        proc.StartInfo.FileName = CurDir() & "\uhppoted-cli.exe"
+        proc.StartInfo.Arguments = ""
+        proc.StartInfo.CreateNoWindow = True
+        proc.StartInfo.UseShellExecute = False
+        proc.StartInfo.RedirectStandardOutput = True
+        proc.Start()
+        proc.WaitForExit()
+
+        Dim output() As String = proc.StandardOutput.ReadToEnd.Split(CChar(vbLf))
+        For Each ln As String In output
+            RichTextBox1.Text = ln & Environment.NewLine & RichTextBox1.Text
+        Next
+
+        Dim c As Char() = {Chr(10)}
+        Dim s As String() = RichTextBox1.Text.Split(c,
+        StringSplitOptions.RemoveEmptyEntries)
+        Array.Reverse(s)
+        RichTextBox1.Text = String.Join(c, s)
+
+        Timer1.Stop()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Search()
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
@@ -102,5 +107,13 @@ Public Class Cli
 
     Private Sub RichTextBox1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles RichTextBox1.KeyPress
         e.Handled = True
+    End Sub
+
+    Private Sub TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox1.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Search()
+            e.Handled = True
+            e.SuppressKeyPress = True
+        End If
     End Sub
 End Class
