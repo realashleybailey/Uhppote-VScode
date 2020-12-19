@@ -7,10 +7,20 @@ Feel free to buy me a cup of coffee, so I can stay motivated and keep updating t
 Easy to use and friendly Access Controller for Uhppote Controllers coded in VB.Net.
 ![Example](https://i.imgur.com/F0QZwnH.png)
 #
+
+
 Status: **Under Development**
 
-Description: This program allows you to Edit Setting on your controller and also control it with features like Remote Door Control, view if Door is Open or Closed and view who Opened the door with the ability to link key codes to Names and Images
+Description: This program allows you to Edit Setting on your controller and also control it with features like Remote Door Control, view if Door is Open or Closed and view who Opened the door with the ability to link key codes to names and images
 
+**Full Screen Interface**
+Some things have not been finished
+![Example](https://i.imgur.com/4nobYQT.png)
+![Example](https://i.imgur.com/rw32Uzy.png)
+
+**Cli App**
+Interface directly with the controller
+![Example](https://i.imgur.com/VqJsxav.png)
 
 #
 **Completed List:**
