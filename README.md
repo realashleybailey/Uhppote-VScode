@@ -10,8 +10,8 @@ Easy to use and friendly Access Controller for Uhppote Controllers coded in VB.N
 ![Example](https://i.imgur.com/F0QZwnH.png)
 #
 
-##Thank you to Uhppoted##
-This program depends upon the work of [Uhppoted (https://github.com/uhppoted)]
+**Thank you to Uhppoted**
+This program depends upon the work of [Uhppoted](https://github.com/uhppoted)
 
 Description: This program allows you to Edit Setting on your controller and also control it with features like Remote Door Control, view if Door is Open or Closed and view who Opened the door with the ability to link key codes to names and images
 #
