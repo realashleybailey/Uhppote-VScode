@@ -25,21 +25,23 @@ Public Class DoorControl
     End Function
 
     Public Shared Function fullscreen()
+
         If DoorControl.ShowInTaskbar = True Then
+
+            FSGUI.Visible = True
             If FSGUI.DataGridView1.Visible = False Then
                 FSGUI.reset()
             End If
 
-            FSGUI.Visible = True
-
-                DoorControl.ShowInTaskbar = False
-                DoorControl.WindowState = FormWindowState.Minimized
-                DoorControl.TopMost = False
-            Else
-                DoorControl.ShowInTaskbar = True
+            DoorControl.Hide()
+            DoorControl.WindowState = FormWindowState.Minimized
+            DoorControl.TopMost = False
+        Else
+            DoorControl.Show()
             DoorControl.WindowState = FormWindowState.Normal
             DoorControl.TopMost = True
         End If
+
     End Function
 
     Function firstrun()
@@ -68,6 +70,65 @@ Public Class DoorControl
     End Function
 
 
+    Function load()
+        firstrun()
+        Me.Visible = True
+        Settings(False)
+        Me.Text = "Hello, " & GetData("user", "name")
+
+        Dim SetupPath As String = Application.StartupPath & "\uhppoted-cli.exe"
+        Using sCreateMSIFile As New FileStream(SetupPath, FileMode.Create)
+            sCreateMSIFile.Write(My.Resources.uhppoted_cli, 0, My.Resources.uhppoted_cli.Length)
+        End Using
+
+        Dim proc As New Process
+        proc.StartInfo.FileName = CurDir() & "\uhppoted-cli.exe"
+        proc.StartInfo.Arguments = "get-devices"
+        proc.StartInfo.CreateNoWindow = True
+        proc.StartInfo.UseShellExecute = False
+        proc.StartInfo.RedirectStandardOutput = True
+        proc.Start()
+        proc.WaitForExit()
+
+        Dim output() As String = proc.StandardOutput.ReadToEnd.Split(CChar(vbLf))
+        RichTextBox1.Text = output(0) & Environment.NewLine & RichTextBox1.Text
+
+        On Error Resume Next
+        Dim serial = output(0).Split(" ")
+        Dim ip = output(0).Split(" ")
+        Label1.Text = "Controller: " & serial(0)
+
+        Label4.Text = "IP Address: " & ip(2)
+        controller = serial(0)
+
+
+
+        Dim proc2 As New Process
+        proc2.StartInfo.FileName = CurDir() & "\uhppoted-cli.exe"
+        proc2.StartInfo.Arguments = "get-listener " & controller
+        proc2.StartInfo.CreateNoWindow = True
+        proc2.StartInfo.UseShellExecute = False
+        proc2.StartInfo.RedirectStandardOutput = True
+        proc2.Start()
+        proc2.WaitForExit()
+
+        Dim output2() As String = proc2.StandardOutput.ReadToEnd.Split(CChar(vbLf))
+        RichTextBox1.Text = output2(0) & Environment.NewLine & RichTextBox1.Text
+
+        Dim udp = output2(0).Split(" ")
+        Label2.Text = "UDP Address: " & udp(2)
+
+        Cli.Top = Me.Top
+        Cli.Left = Me.Left + Me.Width
+        Cli.Height = Me.Height
+        Cli.Width = 698
+
+
+        Cli.Timer1.Stop()
+        Timer1.Start()
+
+    End Function
+
 
 
     Private Sub DoorControl_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -78,71 +139,11 @@ Public Class DoorControl
             For Each cmd As String In command
                 If cmd = "-fullscreen" Then
                     fullscreen()
-
-
-                Else
-                    firstrun()
-                    Me.Visible = True
-                    Settings(False)
-                    Me.Text = GetData("user", "name")
-
-                    Dim SetupPath As String = Application.StartupPath & "\uhppoted-cli.exe"
-                    Using sCreateMSIFile As New FileStream(SetupPath, FileMode.Create)
-                        sCreateMSIFile.Write(My.Resources.uhppoted_cli, 0, My.Resources.uhppoted_cli.Length)
-                    End Using
-
-                    Dim proc As New Process
-                    proc.StartInfo.FileName = CurDir() & "\uhppoted-cli.exe"
-                    proc.StartInfo.Arguments = "get-devices"
-                    proc.StartInfo.CreateNoWindow = True
-                    proc.StartInfo.UseShellExecute = False
-                    proc.StartInfo.RedirectStandardOutput = True
-                    proc.Start()
-                    proc.WaitForExit()
-
-                    Dim output() As String = proc.StandardOutput.ReadToEnd.Split(CChar(vbLf))
-
-                    RichTextBox1.Text = output(0) & Environment.NewLine & RichTextBox1.Text
-
-                    On Error Resume Next
-                    Dim serial = output(0).Split(" ")
-                    Dim ip = output(0).Split(" ")
-                    Label1.Text = "Controller: " & serial(0)
-
-                    Label4.Text = "IP Address: " & ip(2)
-                    controller = serial(0)
-
-
-
-                    Dim proc2 As New Process
-                    proc2.StartInfo.FileName = CurDir() & "\uhppoted-cli.exe"
-                    proc2.StartInfo.Arguments = "get-listener " & controller
-                    proc2.StartInfo.CreateNoWindow = True
-                    proc2.StartInfo.UseShellExecute = False
-                    proc2.StartInfo.RedirectStandardOutput = True
-                    proc2.Start()
-                    proc2.WaitForExit()
-
-                    Dim output2() As String = proc2.StandardOutput.ReadToEnd.Split(CChar(vbLf))
-                    RichTextBox1.Text = output2(0) & Environment.NewLine & RichTextBox1.Text
-
-                    Dim udp = output2(0).Split(" ")
-                    Label2.Text = "UDP Address: " & udp(2)
-
-                    Cli.Top = Me.Top
-                    Cli.Left = Me.Left + Me.Width
-                    Cli.Height = Me.Height
-                    Cli.Width = 698
-
-
-                    Cli.Timer1.Stop()
-                    Timer1.Start()
-
-
                 End If
             Next
         End If
 
+        BackgroundWorker1.RunWorkerAsync()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -279,34 +280,37 @@ Public Class DoorControl
     End Sub
 
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
-        Dim proc As New Process
-        proc.StartInfo.FileName = CurDir() & "\uhppoted-cli.exe"
-        proc.StartInfo.Arguments = "get-status " & controller
-        proc.StartInfo.CreateNoWindow = True
-        proc.StartInfo.UseShellExecute = False
-        proc.StartInfo.RedirectStandardOutput = True
-        proc.Start()
-        proc.WaitForExit()
+        Try
+            Dim proc As New Process
+            proc.StartInfo.FileName = CurDir() & "\uhppoted-cli.exe"
+            proc.StartInfo.Arguments = "get-status " & controller
+            proc.StartInfo.CreateNoWindow = True
+            proc.StartInfo.UseShellExecute = False
+            proc.StartInfo.RedirectStandardOutput = True
+            proc.Start()
+            proc.WaitForExit()
 
-        Dim output() As String = proc.StandardOutput.ReadToEnd.Split(CChar(vbLf))
-        Dim result() = output(0).Remove(0, 66).Split(" ")
-        If result(0) = 44 Or result(0) = 24 Then
-            Label3.Text = "Door 1 is Closed"
-            Label5.Visible = True
-            Label6.Visible = False
-            Label5.Text = 1
-            PictureBox1.Image = My.Resources.closed
+            Dim output() As String = proc.StandardOutput.ReadToEnd.Split(CChar(vbLf))
+            Dim result() = output(0).Remove(0, 66).Split(" ")
+            If result(0) = 44 Or result(0) = 24 Then
+                Label3.Text = "Door 1 is Closed"
+                Label5.Visible = True
+                Label6.Visible = False
+                Label5.Text = 1
+                PictureBox1.Image = My.Resources.closed
 
-        ElseIf result(0) = 23 Then
-            Label3.Text = "Door 1 is Open"
-            Label5.Visible = False
-            Label6.Visible = True
-            Label6.Text = 1
-            PictureBox1.Image = My.Resources.open
-        Else
-            MsgBox("error")
+            ElseIf result(0) = 23 Then
+                Label3.Text = "Door 1 is Open"
+                Label5.Visible = False
+                Label6.Visible = True
+                Label6.Text = 1
+                PictureBox1.Image = My.Resources.open
+            Else
+                MsgBox("error")
 
-        End If
+            End If
+        Catch
+        End Try
 
 
 
@@ -352,5 +356,26 @@ Public Class DoorControl
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
         fullscreen()
+    End Sub
+
+    Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+        CheckForIllegalCrossThreadCalls = False
+        Try
+            load()
+        Catch
+        End Try
+
+    End Sub
+
+    Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
+        Try
+            Timer1.Enabled = True
+            Timer2.Enabled = True
+        Catch ex As Exception
+            Dim errors As String = "Error: " & ex.ToString
+            MessageBox.Show(errors, "Error Starting Timer")
+        End Try
+
+
     End Sub
 End Class

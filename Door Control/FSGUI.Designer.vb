@@ -80,10 +80,13 @@ Partial Class FSGUI
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.Panel11 = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Panel10 = New System.Windows.Forms.Panel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Panel7 = New System.Windows.Forms.Panel()
@@ -100,6 +103,9 @@ Partial Class FSGUI
         Me.listcardstimer = New System.Windows.Forms.Timer(Me.components)
         Me.Clock = New System.Windows.Forms.Timer(Me.components)
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        Me.GetEventIndex = New System.Windows.Forms.Timer(Me.components)
+        Me.GetEvent = New System.Windows.Forms.Timer(Me.components)
         Me.ToolStrip1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -109,9 +115,11 @@ Partial Class FSGUI
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
-        Me.TableLayoutPanel1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel8.SuspendLayout()
+        Me.Panel9.SuspendLayout()
+        Me.Panel11.SuspendLayout()
+        Me.Panel10.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.Panel7.SuspendLayout()
@@ -520,7 +528,7 @@ Partial Class FSGUI
         '
         'Panel4
         '
-        Me.Panel4.Controls.Add(Me.TableLayoutPanel1)
+        Me.Panel4.Controls.Add(Me.Panel8)
         Me.Panel4.Controls.Add(Me.Panel5)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(0, 24)
@@ -529,51 +537,77 @@ Partial Class FSGUI
         Me.Panel4.TabIndex = 11
         Me.Panel4.Visible = False
         '
-        'TableLayoutPanel1
+        'Panel8
         '
-        Me.TableLayoutPanel1.ColumnCount = 2
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.55224!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.44776!))
-        Me.TableLayoutPanel1.Controls.Add(Me.PictureBox1, 1, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.Panel8, 1, 1)
-        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(872, 0)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 2
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 73.80531!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.19469!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(670, 565)
-        Me.TableLayoutPanel1.TabIndex = 12
+        Me.Panel8.Controls.Add(Me.Panel9)
+        Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel8.Location = New System.Drawing.Point(872, 0)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Size = New System.Drawing.Size(670, 565)
+        Me.Panel8.TabIndex = 12
+        '
+        'Panel9
+        '
+        Me.Panel9.Controls.Add(Me.Panel11)
+        Me.Panel9.Controls.Add(Me.Panel10)
+        Me.Panel9.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Panel9.Location = New System.Drawing.Point(305, 0)
+        Me.Panel9.Name = "Panel9"
+        Me.Panel9.Size = New System.Drawing.Size(365, 565)
+        Me.Panel9.TabIndex = 0
+        '
+        'Panel11
+        '
+        Me.Panel11.Controls.Add(Me.Label3)
+        Me.Panel11.Controls.Add(Me.Label10)
+        Me.Panel11.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel11.Location = New System.Drawing.Point(0, 460)
+        Me.Panel11.Name = "Panel11"
+        Me.Panel11.Size = New System.Drawing.Size(365, 58)
+        Me.Panel11.TabIndex = 1
+        '
+        'Label3
+        '
+        Me.Label3.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
+        Me.Label3.Location = New System.Drawing.Point(0, 39)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(365, 19)
+        Me.Label3.TabIndex = 0
+        Me.Label3.Text = "15122699"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'Label10
+        '
+        Me.Label10.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label10.Font = New System.Drawing.Font("Segoe UI Semibold", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
+        Me.Label10.Location = New System.Drawing.Point(0, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(365, 35)
+        Me.Label10.TabIndex = 1
+        Me.Label10.Text = "Ashley Bailey"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'Panel10
+        '
+        Me.Panel10.Controls.Add(Me.PictureBox1)
+        Me.Panel10.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel10.Location = New System.Drawing.Point(0, 0)
+        Me.Panel10.Name = "Panel10"
+        Me.Panel10.Padding = New System.Windows.Forms.Padding(35, 30, 35, 30)
+        Me.Panel10.Size = New System.Drawing.Size(365, 460)
+        Me.Panel10.TabIndex = 0
         '
         'PictureBox1
         '
         Me.PictureBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PictureBox1.Location = New System.Drawing.Point(335, 3)
+        Me.PictureBox1.Location = New System.Drawing.Point(35, 30)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(332, 411)
+        Me.PictureBox1.Size = New System.Drawing.Size(295, 400)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
-        '
-        'Panel8
-        '
-        Me.Panel8.Controls.Add(Me.Label3)
-        Me.Panel8.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel8.Location = New System.Drawing.Point(335, 420)
-        Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(332, 82)
-        Me.Panel8.TabIndex = 1
-        '
-        'Label3
-        '
-        Me.Label3.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
-        Me.Label3.Location = New System.Drawing.Point(0, 0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(332, 53)
-        Me.Label3.TabIndex = 0
-        Me.Label3.Text = "Ashley Bailey"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Panel5
         '
@@ -669,6 +703,17 @@ Partial Class FSGUI
         Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
         Me.ContextMenuStrip1.Text = "Remote Open"
         '
+        'BackgroundWorker1
+        '
+        '
+        'GetEventIndex
+        '
+        Me.GetEventIndex.Interval = 500
+        '
+        'GetEvent
+        '
+        Me.GetEvent.Interval = 500
+        '
         'FSGUI
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -697,9 +742,11 @@ Partial Class FSGUI
         Me.Panel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
-        Me.TableLayoutPanel1.ResumeLayout(False)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel8.ResumeLayout(False)
+        Me.Panel9.ResumeLayout(False)
+        Me.Panel11.ResumeLayout(False)
+        Me.Panel10.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
         Me.Panel7.ResumeLayout(False)
@@ -770,9 +817,15 @@ Partial Class FSGUI
     Friend WithEvents Clock As Timer
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents ToolStripMenuItem6 As ToolStripMenuItem
-    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents Panel8 As Panel
     Friend WithEvents Label3 As Label
     Friend WithEvents ToolStripMenuItemDisplay As ToolStripMenuItem
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents GetEventIndex As Timer
+    Friend WithEvents GetEvent As Timer
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Panel8 As Panel
+    Friend WithEvents Panel9 As Panel
+    Friend WithEvents Panel11 As Panel
+    Friend WithEvents Panel10 As Panel
 End Class

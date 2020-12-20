@@ -37,11 +37,21 @@
             DoorControl.Location = Screen.AllScreens(index).Bounds.Location
             FSGUI.Location = Screen.AllScreens(index).Bounds.Location
             FSGUI.WindowState = FormWindowState.Maximized
+
+            Dim Current_Screen As Screen = Screen.FromControl(FSGUI)
+            If Screen.PrimaryScreen.DeviceName = Current_Screen.DeviceName Then
+                FSGUI.hidetaskbar()
+            Else
+                FSGUI.showtaskbar()
+            End If
+
             getscreen()
+
         End If
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
         If ListView1.SelectedItems.Count = 1 Then
             Dim index As Integer = ListView1.FocusedItem.Index
             FSGUI.WindowState = FormWindowState.Normal
@@ -52,6 +62,14 @@
             FSGUI.TopMost = True
             Me.Visible = False
             FSGUI.Enabled = True
+
+            Dim Current_Screen As Screen = Screen.FromControl(FSGUI)
+            If Screen.PrimaryScreen.DeviceName = Current_Screen.DeviceName Then
+                FSGUI.hidetaskbar()
+            Else
+                FSGUI.showtaskbar()
+            End If
+
         Else
             FSGUI.TopMost = True
             Me.Visible = False

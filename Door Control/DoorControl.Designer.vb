@@ -45,6 +45,7 @@ Partial Class DoorControl
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.GroupBox1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -145,7 +146,6 @@ Partial Class DoorControl
         '
         'Timer1
         '
-        Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1
         '
         'PictureBox1
@@ -175,7 +175,6 @@ Partial Class DoorControl
         '
         'Timer2
         '
-        Me.Timer2.Enabled = True
         Me.Timer2.Interval = 1000
         '
         'Label5
@@ -239,6 +238,9 @@ Partial Class DoorControl
         Me.Button9.Text = "Full Screen"
         Me.Button9.UseVisualStyleBackColor = True
         '
+        'BackgroundWorker1
+        '
+        '
         'DoorControl
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -296,4 +298,5 @@ Partial Class DoorControl
     Friend WithEvents Button7 As Button
     Friend WithEvents Button8 As Button
     Friend WithEvents Button9 As Button
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
 End Class

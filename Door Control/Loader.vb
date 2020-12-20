@@ -2,11 +2,13 @@
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         If Label1.Text = "Please wait." Then
             Label1.Text = "Please wait.."
+            Me.Name = "Loading.."
         ElseIf Label1.Text = "Please wait.." Then
             Label1.Text = "Please wait..."
+            Me.Name = "Loading..."
         ElseIf Label1.Text = "Please wait..." Then
             Label1.Text = "Please wait."
-
+            Me.Name = "Loading."
         End If
     End Sub
 
@@ -32,6 +34,7 @@
         If ProgressBar1.Value > 80 And FSGUI.Timer1.Enabled = False Then
             FSGUI.Timer1.Enabled = True
             FSGUI.Timer1.Start()
+
         End If
 
         If ProgressBar1.Value + value > 100 Then
@@ -43,15 +46,14 @@
             FSGUI.Cursor = Cursors.Default
             FSGUI.Enabled = True
 
-            If FSGUI.DataGridView1.Visible = True Then
-                FSGUI.expand()
-            End If
-
+            FSGUI.GetEvent.Enabled = True
+            FSGUI.GetEventIndex.Enabled = True
+            FSGUI.GetEvent.Start()
+            FSGUI.GetEventIndex.Start()
 
             If FSGUI.DataGridView2.Visible = True Then
                 FSGUI.listcards()
             End If
-
 
             If FSGUI.Panel4.Visible = False Then
                 FSGUI.Panel4.Visible = True

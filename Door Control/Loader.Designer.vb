@@ -44,6 +44,7 @@ Partial Class Loader
         Me.ProgressBar1.Location = New System.Drawing.Point(12, 39)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(336, 23)
+        Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
         Me.ProgressBar1.TabIndex = 1
         '
         'Timer1
@@ -63,7 +64,7 @@ Partial Class Loader
         Me.ClientSize = New System.Drawing.Size(363, 80)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.Label1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "Loader"
